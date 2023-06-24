@@ -188,7 +188,7 @@ public class RoomCon : MonoBehaviour
         if (!roomList.Contains(roomid))
         {
             GameObject newTip = Instantiate(tip);
-            newTip.transform.FindChild("Text").GetComponent<Text>().text = "此房间不存在！";
+            newTip.transform.Find("Text").GetComponent<Text>().text = "此房间不存在！";
             newTip.transform.parent = mycanvas.transform;
             newTip.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
             Destroy(newTip, 2.0f);
@@ -199,7 +199,7 @@ public class RoomCon : MonoBehaviour
         if (int.Parse(hashMap[roomid]) == 3)
         {
             GameObject newTip = Instantiate(tip);
-            newTip.transform.FindChild("Text").GetComponent<Text>().text = "此房间已满！";
+            newTip.transform.Find("Text").GetComponent<Text>().text = "此房间已满！";
             newTip.transform.parent = mycanvas.transform;
             newTip.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
             Destroy(newTip, 2.0f);
@@ -300,7 +300,7 @@ public class RoomCon : MonoBehaviour
         if (roomList.Contains(roomid))
         {
             GameObject newTip = Instantiate(tip);
-            newTip.transform.FindChild("Text").GetComponent<Text>().text = "此房间已存在！";
+            newTip.transform.Find("Text").GetComponent<Text>().text = "此房间已存在！";
             newTip.transform.parent = mycanvas.transform;
             newTip.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
             Destroy(newTip, 2.0f);
@@ -402,7 +402,7 @@ public class RoomCon : MonoBehaviour
         else
         {
             // msglist
-            foreach (Transform child in Scroll_View_roomList.transform.FindChild("Viewport").FindChild("Content").transform)
+            foreach (Transform child in Scroll_View_roomList.transform.Find("Viewport").Find("Content").transform)
             {
                 Destroy(child.gameObject);
             }
@@ -419,7 +419,7 @@ public class RoomCon : MonoBehaviour
                     t3.GetComponent<Text>().font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
                     RectTransform rectTransform2 = t3.GetComponent<RectTransform>();
                     rectTransform2.localPosition = new Vector3(0, 0, 0);
-                    t3.transform.parent = Scroll_View_roomList.transform.FindChild("Viewport").FindChild("Content");
+                    t3.transform.parent = Scroll_View_roomList.transform.Find("Viewport").Find("Content");
 
                 }
         }

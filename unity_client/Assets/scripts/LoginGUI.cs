@@ -21,7 +21,7 @@ public class LoginGUI : MonoBehaviour
     private Button btn_login;
     private InputField infield_username;
 
-    public Canvas mycanvas; // ÎªÏÔÊ¾ÌáÊ¾µ¯¿ò
+    public Canvas mycanvas; // Îªï¿½ï¿½Ê¾ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½
     public GameObject tipPrefab;
     public bool tipFlag;
 
@@ -29,11 +29,11 @@ public class LoginGUI : MonoBehaviour
     {
         tipFlag = false;
 
-        // ÕÒµ½¸÷¸ö¿Ø¼þ
+        // ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½
         infield_username = GameObject.FindGameObjectWithTag("username").GetComponent<InputField>();
         btn_login = GameObject.FindGameObjectWithTag("btn_login").GetComponent<Button>();
 
-        // Ìí¼Ó°´Å¥µÄÊÂ¼þ¼àÌý·½·¨
+        // ï¿½ï¿½Ó°ï¿½Å¥ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         btn_login.onClick.AddListener(Login);
     }
 
@@ -49,12 +49,12 @@ public class LoginGUI : MonoBehaviour
     //Login the chat application and new PomeloClient.
     void Login()
     {
-        userName = infield_username.text; // »ñÈ¡ÊäÈë¿òÖÐµÄÐÅÏ¢
+        userName = infield_username.text; // ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½Ï¢
       
         if (userName == "" )
             return;
 
-        string host = "127.0.0.1"; // gateµÄhostºÍport
+        string host = "192.168.0.105"; // gateï¿½ï¿½hostï¿½ï¿½port
         int port = 3014;
 
         pomeloClient = new PomeloClient();
@@ -62,13 +62,13 @@ public class LoginGUI : MonoBehaviour
         //listen on network state changed event
         pomeloClient.NetWorkStateChangedEvent += (state) =>
         {
-            Debug.logger.Log("CurrentState is:" + state);
+            Debug.unityLogger.Log("CurrentState is:" + state);
         };
         
-        // ÇëÇógate·þÎñÆ÷£¬µÃµ½connector·þÎñÆ÷µÄhostºÍclientPort
+        // ï¿½ï¿½ï¿½ï¿½gateï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½connectorï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½hostï¿½ï¿½clientPort
         pomeloClient.initClient(host, port, () =>
         {
-            // user ÏûÏ¢´«µÝ¸ø gate.gateHandler.queryEntry
+            // user ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Ý¸ï¿½ gate.gateHandler.queryEntry
             JsonObject user = new JsonObject();
             user["uid"] = userName;
             pomeloClient.connect(user, data =>
@@ -102,7 +102,7 @@ public class LoginGUI : MonoBehaviour
                 });
             });
 
-            // ÇëÇóµ½ÁËconnectorÊý¾Ýºó£¬Ìø×ª³¡¾°
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½connectorï¿½ï¿½ï¿½Ýºï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½
             //_bNeedLoadScene = true;
         }
     }
@@ -113,7 +113,7 @@ public class LoginGUI : MonoBehaviour
         userMessage["uid"] = userName;
         pomeloClient.request("connector.entryHandler.enterFirst", userMessage, (data) =>
         {
-            // ÓÃ»§ÃûÖØ¸´£¬»òÕß·þÎñÆ÷ÄÚ²¿´íÎó
+            // ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú²ï¿½ï¿½ï¿½ï¿½ï¿½
             string tmp = data.ToString();
             JsonData jd = JsonMapper.ToObject(tmp);
             if (jd.Keys.Contains("code"))
@@ -121,7 +121,7 @@ public class LoginGUI : MonoBehaviour
                 tipFlag = true;
                 return;
             }
-            // ÓÃ»§µÇÂ¼³É¹¦
+            // ï¿½Ã»ï¿½ï¿½ï¿½Â¼ï¿½É¹ï¿½
             roomsObj = data;
             _bNeedLoadScene = true;
         });
@@ -141,7 +141,7 @@ public class LoginGUI : MonoBehaviour
 
         if (_bNeedLoadScene)
         {
-            // ³¡¾°ÇÐ»»
+            // ï¿½ï¿½ï¿½ï¿½ï¿½Ð»ï¿½
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
 
@@ -149,7 +149,7 @@ public class LoginGUI : MonoBehaviour
         {
             tipFlag = false;
             GameObject newTip = Instantiate(tipPrefab);
-            newTip.transform.FindChild("Text").GetComponent<Text>().text = "user alreay exist";
+            newTip.transform.Find("Text").GetComponent<Text>().text = "user alreay exist";
             newTip.transform.parent = mycanvas.transform;
             newTip.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
             Destroy(newTip, 2.0f);

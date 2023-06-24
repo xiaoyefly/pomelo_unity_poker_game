@@ -375,7 +375,7 @@ public class puke : MonoBehaviour
         {
             //Debug.Log("还未轮到自己出牌");
             GameObject newTip = Instantiate(tipPrefab);
-            newTip.transform.FindChild("Text").GetComponent<Text>().text = "还未轮到自己出牌！";
+            newTip.transform.Find("Text").GetComponent<Text>().text = "还未轮到自己出牌！";
             newTip.transform.parent = mycanvas.transform;
             newTip.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
             Destroy(newTip, 2.0f);
@@ -406,7 +406,7 @@ public class puke : MonoBehaviour
         {
             //Debug.Log("还未轮到自己出牌");
             GameObject newTip = Instantiate(tipPrefab);
-            newTip.transform.FindChild("Text").GetComponent<Text>().text = "还未轮到自己出牌！";
+            newTip.transform.Find("Text").GetComponent<Text>().text = "还未轮到自己出牌！";
             newTip.transform.parent = mycanvas.transform;
             newTip.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
             Destroy(newTip, 2.0f);
@@ -419,7 +419,7 @@ public class puke : MonoBehaviour
         ArrayList deleteObj = new ArrayList();
         foreach (GameObject obj in userCardNumberGO)
         {
-            string strVal = obj.transform.FindChild("Text").gameObject.GetComponent<Text>().text;
+            string strVal = obj.transform.Find("Text").gameObject.GetComponent<Text>().text;
             int val = int.Parse(strVal);
             bool flag = hashMap[val];
             if (flag == true)
@@ -444,7 +444,7 @@ public class puke : MonoBehaviour
         // deleteCards.Clear();
         foreach (GameObject obj in deleteObj)
         {
-            string strVal = obj.transform.FindChild("Text").gameObject.GetComponent<Text>().text;
+            string strVal = obj.transform.Find("Text").gameObject.GetComponent<Text>().text;
             //deleteCards.Add(strVal);
             //deleteCardsNum.Add(strVal);
 
@@ -458,7 +458,7 @@ public class puke : MonoBehaviour
             deleteCards.Clear();
 
             GameObject newTip = Instantiate(tipPrefab);
-            newTip.transform.FindChild("Text").GetComponent<Text>().text = "出牌不合理！";
+            newTip.transform.Find("Text").GetComponent<Text>().text = "出牌不合理！";
             newTip.transform.parent = mycanvas.transform;
             newTip.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
             Destroy(newTip, 2.0f);
@@ -488,7 +488,7 @@ public class puke : MonoBehaviour
             if (!PlayCard.isCanOutCard(c1, cards, type1, type2))
             {
                 GameObject newTip = Instantiate(tipPrefab);
-                newTip.transform.FindChild("Text").GetComponent<Text>().text = "出的牌不够大！";
+                newTip.transform.Find("Text").GetComponent<Text>().text = "出的牌不够大！";
                 newTip.transform.parent = mycanvas.transform;
                 newTip.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
                 Destroy(newTip, 2.0f);
@@ -541,7 +541,7 @@ public class puke : MonoBehaviour
 
         foreach (GameObject obj in userCardNumberGO)
         {
-            string strVal = obj.transform.FindChild("Text").gameObject.GetComponent<Text>().text;
+            string strVal = obj.transform.Find("Text").gameObject.GetComponent<Text>().text;
             int val = int.Parse(strVal);
             bool flag = hashMap[val];
             if (flag == true)
@@ -559,11 +559,11 @@ public class puke : MonoBehaviour
     private void onClickButtonHandler(GameObject obj)
     {
         //Debug.Log("你点击了一张牌");
-        string strVal = obj.transform.FindChild("Text").gameObject.GetComponent<Text>().text;
+        string strVal = obj.transform.Find("Text").gameObject.GetComponent<Text>().text;
         int val = int.Parse(strVal);
         bool flag = hashMap[val];
 
-        GameObject t3 = obj.transform.FindChild("Image").gameObject;
+        GameObject t3 = obj.transform.Find("Image").gameObject;
         RectTransform rectTransform2 = t3.GetComponent<RectTransform>();
         if (flag == false)
         {
@@ -586,7 +586,7 @@ public class puke : MonoBehaviour
         if(GameState != 0) // 未开始， 弹出提示框
         {
             GameObject newTip = Instantiate(tipPrefab);
-            newTip.transform.FindChild("Text").GetComponent<Text>().text = "游戏还未开始";
+            newTip.transform.Find("Text").GetComponent<Text>().text = "游戏还未开始";
             newTip.transform.parent = mycanvas.transform;
             newTip.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
             Destroy(newTip, 2.0f);
@@ -616,7 +616,7 @@ public class puke : MonoBehaviour
         // 游戏结束时的弹框提醒
         if (GameState == 1)
         {
-            foreach (Transform child in Scroll_View_cards_lastOut.transform.FindChild("Viewport").FindChild("Content").transform)
+            foreach (Transform child in Scroll_View_cards_lastOut.transform.Find("Viewport").Find("Content").transform)
             {
                 //child.gameObject.SetActive(false);
                 Destroy(child.gameObject);
@@ -624,11 +624,11 @@ public class puke : MonoBehaviour
 
             deleteCards.Clear();
 
-            foreach (Transform child in Scroll_View_cards.transform.FindChild("Viewport").FindChild("Content").transform)
+            foreach (Transform child in Scroll_View_cards.transform.Find("Viewport").Find("Content").transform)
                 Destroy(child.gameObject);
 
             GameObject newTip = Instantiate(tipPrefab);
-            newTip.transform.FindChild("Text").GetComponent<Text>().text = "Game Over！";
+            newTip.transform.Find("Text").GetComponent<Text>().text = "Game Over！";
             newTip.transform.parent = mycanvas.transform;
             newTip.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
             Destroy(newTip, 2.0f);
@@ -642,7 +642,7 @@ public class puke : MonoBehaviour
         {
             if (deleteCards.Count >= 1)
             {
-                foreach (Transform child in Scroll_View_cards_lastOut.transform.FindChild("Viewport").FindChild("Content").transform)
+                foreach (Transform child in Scroll_View_cards_lastOut.transform.Find("Viewport").Find("Content").transform)
                     if (child != null)
                     {
                         Destroy(child.gameObject);
@@ -651,13 +651,13 @@ public class puke : MonoBehaviour
                 foreach (string val in deleteCards)
                 {
                     GameObject t2 = (GameObject)Instantiate(msgPrefab);
-                    t2.transform.FindChild("Text").gameObject.GetComponent<Text>().text = val;
-                    t2.transform.FindChild("Image").gameObject.GetComponent<Image>().GetComponent<Image>().overrideSprite =
+                    t2.transform.Find("Text").gameObject.GetComponent<Text>().text = val;
+                    t2.transform.Find("Image").gameObject.GetComponent<Image>().GetComponent<Image>().overrideSprite =
                         Resources.Load("puke_prefabs/" + val.ToString(), typeof(Sprite)) as Sprite;
-                    t2.transform.SetParent(Scroll_View_cards_lastOut.transform.FindChild("Viewport").FindChild("Content").transform);
+                    t2.transform.SetParent(Scroll_View_cards_lastOut.transform.Find("Viewport").Find("Content").transform);
 
                     // 
-                    foreach (Transform child in Scroll_View_cards.transform.FindChild("Viewport").FindChild("Content").transform)
+                    foreach (Transform child in Scroll_View_cards.transform.Find("Viewport").Find("Content").transform)
                     {
                         if (child.gameObject.name == val)
                         {
@@ -676,7 +676,7 @@ public class puke : MonoBehaviour
         {
             isFapai = false;
 
-            foreach (Transform child in Scroll_View_cards.transform.FindChild("Viewport").FindChild("Content").transform)
+            foreach (Transform child in Scroll_View_cards.transform.Find("Viewport").Find("Content").transform)
             {
                 Destroy(child.gameObject);
             }
@@ -688,9 +688,9 @@ public class puke : MonoBehaviour
             {
                 GameObject t2 = (GameObject)Instantiate(msgPrefab);
                 t2.name = val.ToString();
-                t2.transform.FindChild("Text").gameObject.GetComponent<Text>().text = val.ToString();
+                t2.transform.Find("Text").gameObject.GetComponent<Text>().text = val.ToString();
                 //Texture2D _tex = (Texture2D)Resources.Load("puke_prefabs/" + val.ToString());
-                t2.transform.FindChild("Image").gameObject.GetComponent<Image>().GetComponent<Image>().overrideSprite =
+                t2.transform.Find("Image").gameObject.GetComponent<Image>().GetComponent<Image>().overrideSprite =
                     Resources.Load("puke_prefabs/" + val.ToString(), typeof(Sprite)) as Sprite;
                 //t2.transform.parent = Scroll_View_cards.transform.FindChild("Viewport").FindChild("Content");
                 // t2.transform.SetParent(Scroll_View_cards.transform.FindChild("Viewport").FindChild("Content").transform);
@@ -701,7 +701,7 @@ public class puke : MonoBehaviour
                 }
 
                 RectTransform rectTransform2 = t2.GetComponent<RectTransform>();
-                string strVal = t2.transform.FindChild("Text").gameObject.GetComponent<Text>().text;
+                string strVal = t2.transform.Find("Text").gameObject.GetComponent<Text>().text;
                 bool flag = false;
                 if (hashMap.ContainsKey(int.Parse(strVal)))
                     flag = hashMap[int.Parse(strVal)];
@@ -721,7 +721,7 @@ public class puke : MonoBehaviour
             if (userCardNumberGO != null && userCardNumberGO.Count >= 1)
                 foreach (GameObject go in userCardNumberGO)
                 {
-                    go.transform.SetParent(Scroll_View_cards.transform.FindChild("Viewport").FindChild("Content").transform);
+                    go.transform.SetParent(Scroll_View_cards.transform.Find("Viewport").Find("Content").transform);
                 }
         }
 

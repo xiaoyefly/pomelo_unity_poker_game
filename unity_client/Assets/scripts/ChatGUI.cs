@@ -10,14 +10,14 @@ using UnityEngine.UI;
 
 public class ChatGUI : MonoBehaviour
 {
-    // Ö±½Ó´Ólogin »ñÈ¡userName,rooms,PomeloClient
+    // Ö±ï¿½Ó´ï¿½login ï¿½ï¿½È¡userName,rooms,PomeloClient
     private string userName = LoginGUI.userName;
     private PomeloClient pclient = LoginGUI.pomeloClient;
 
 
-    public static string inputField = "";   // ÊäÈëµÄÁÄÌìÄÚÈÝ
+    public static string inputField = "";   // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-    private ArrayList userList = RoomCon.userListInARoom; // Í¬Ò»·¿¼äµÄËùÓÐÓÃ»§
+    private ArrayList userList = RoomCon.userListInARoom; // Í¬Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½
 
     public bool debug = true;
 
@@ -27,7 +27,7 @@ public class ChatGUI : MonoBehaviour
     public Button btn;
 
 
-    private ArrayList chatRecords = new ArrayList();   // ¼ÇÂ¼Êý¾ÝµÄlist
+    private ArrayList chatRecords = new ArrayList();   // ï¿½ï¿½Â¼ï¿½ï¿½ï¿½Ýµï¿½list
 
     public Text txtRoomId;
     public Text roomNum;
@@ -43,33 +43,33 @@ public class ChatGUI : MonoBehaviour
 
         txtRoomId.text = RoomCon.roomid;
 
-        // ¸Ã·¿¼äÓÐÒ»¸öÐÂµÄµÄÓÃ»§¼ÓÈëÁË
+        // ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ÂµÄµï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         pclient.on("onCommonUserAddToGame", (data) =>
         {
             string tmp = data.ToString();
             JsonData jdtmp = JsonMapper.ToObject(tmp);
 
             string newRid = jdtmp["rid"].ToString();
-            string uid = jdtmp["uid"].ToString(); // ¸Ã·¿¼äµÄÈËÊý
+            string uid = jdtmp["uid"].ToString(); // ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
             if (!userList.Contains(uid))
                 userList.Add(uid);
         });
 
-        // Íæ¼ÒÖÐÍ¾ÍË³öÁË
+        // ï¿½ï¿½ï¿½ï¿½ï¿½Í¾ï¿½Ë³ï¿½ï¿½ï¿½
         pclient.on("onDelCommonUserInRoom", (data) =>
         {
             string tmp = data.ToString();
             JsonData jdtmp = JsonMapper.ToObject(tmp);
 
             string newRid = jdtmp["rid"].ToString();
-            string uid = jdtmp["uid"].ToString(); // ¸Ã·¿¼äµÄÈËÊý
+            string uid = jdtmp["uid"].ToString(); // ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
             if (userList.Contains(uid))
                 userList.Remove(uid);
         });
 
-        // Ìí¼Ó°´Å¥µÄÊÂ¼þ¼àÌý·½·¨
+        // ï¿½ï¿½Ó°ï¿½Å¥ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         btn.onClick.AddListener(msgSend);
 
         pclient.on("onChat", (data) =>
@@ -92,7 +92,7 @@ public class ChatGUI : MonoBehaviour
 
     void msgSend()
     {
-        inputField = inField_msg.text; // »ñÈ¡ÊäÈë¿òÖÐµÄÐÅÏ¢
+        inputField = inField_msg.text; // ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½Ï¢
         inField_msg.text = "";
         if (inputField == null || inputField == "")
             return;
@@ -119,7 +119,7 @@ public class ChatGUI : MonoBehaviour
             Application.Quit();
         }
 
-        foreach (Transform child in scroll.transform.FindChild("Viewport").FindChild("Content").transform)
+        foreach (Transform child in scroll.transform.Find("Viewport").Find("Content").transform)
         {
             Destroy(child.gameObject);
         }
@@ -137,15 +137,15 @@ public class ChatGUI : MonoBehaviour
                 t3.GetComponent<Text>().font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
                 RectTransform rectTransform2 = t3.GetComponent<RectTransform>();
                 rectTransform2.localPosition = new Vector3(0, 0, 0);
-                t3.transform.parent = scroll.transform.FindChild("Viewport").FindChild("Content");
+                t3.transform.parent = scroll.transform.Find("Viewport").Find("Content");
             }
 
-        // ·¿¼äÈËÊý
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         int userlistLen = userList.Count;
         roomNum.text = userlistLen.ToString();
 
         // msglist
-        foreach (Transform child in scroll_msg.transform.FindChild("Viewport").FindChild("Content").transform)
+        foreach (Transform child in scroll_msg.transform.Find("Viewport").Find("Content").transform)
         {
             Destroy(child.gameObject);
         }
@@ -154,10 +154,10 @@ public class ChatGUI : MonoBehaviour
         foreach (ChatRecord cr in chatRecords)
         {
             GameObject t2 = (GameObject)Instantiate(msgPrefab);
-            t2.transform.FindChild("msg").gameObject.GetComponent<Text>().text = cr.name + ": " + cr.dialog;
+            t2.transform.Find("msg").gameObject.GetComponent<Text>().text = cr.name + ": " + cr.dialog;
             RectTransform rectTransform2 = t2.GetComponent<RectTransform>();
             //rectTransform2.localPosition = new Vector3(0, 0, 0);
-            t2.transform.parent = scroll_msg.transform.FindChild("Viewport").FindChild("Content");
+            t2.transform.parent = scroll_msg.transform.Find("Viewport").Find("Content");
         }
         
         /*
